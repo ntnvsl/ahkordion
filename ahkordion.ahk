@@ -191,7 +191,7 @@ chord() {
         abc(notes[1], false)
         (is5? 5 : aug? '+' : hdim? 'ø' : dim7? '⁰7' : dim? '⁰' : mi3? 'm' : _)
         (!is7 and is6 ? 6 : _)
-        (is7 and !b7 ? 'maj' : _)
+        (is7 and n7 ? 'maj' : _)
         (is7 ? is6 ? 13 : is11 ? 11 : is9 ? 9 : 7 : _)
         (sus2 ? 'sus2' : sus4 ? 'sus4' : _)
         (' ' StrReplace(
@@ -201,6 +201,7 @@ chord() {
           (!is7 and is11 ? '(11)' : _)
           (!dim and b5 ? '(' (n5 ? '♯11' : '♭5') ')' : _)
           (!aug and b6 ? '(' (n5 ? '♭13' : '♯5') ')' : _)
+          (b7 and n7 ? '(♭7)' : _)
         , ')(', ', ')) '`n'
       )
       if A_Index = len
