@@ -191,7 +191,7 @@ chord() {
         abc(notes[1], false)
         (is5? 5 : aug? '+' : hdim? 'ø' : dim7? '⁰7' : dim? '⁰' : mi3? 'm' : _)
         (!is7 and is6 ? 6 : _)
-        (is7 and n7 ? 'maj' : _)
+        (n7 ? 'maj' : _)
         (is7 ? is6 ? 13 : is11 ? 11 : is9 ? 9 : 7 : _)
         (sus2 ? 'sus2' : sus4 ? 'sus4' : _)
         (' ' StrReplace(
