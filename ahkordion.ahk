@@ -7,11 +7,11 @@ layout := { ; kbdlayout.info/kbdusx/scancodes
      !Pause:: ExitApp
 #HotIf A.isActive
         Esc:: bend(-2,, 4, 1), strum(0), DllCall('Sleep', u, 175), pitch(0)
-        #F1:: A.layout := A.layout = 'B' ? 'C' : 'B', Reload()
+        ^F1:: A.layout := A.layout = 'B' ? 'C' : 'B', Reload()
          F3:: strum(0), A.midiChannel -= A.midiChannel > 0, tip()
          F4:: strum(0), A.midiChannel += A.midiChannel < 15, tip()
-        #F3:: A.midiPort -= A.midiPort > 0, Reload()
-        #F4:: A.midiPort += A.midiPort < 63, Reload()
+        ^F3:: A.midiPort -= A.midiPort > 0, Reload()
+        ^F4:: A.midiPort += A.midiPort < 63, Reload()
          F6:: A.velocityA += op('velocityA', -1), tip()
          F7:: A.velocityA += op('velocityA', +1), tip()
         !F6:: A.velocityB += op('velocityB', -1), tip()
@@ -41,7 +41,7 @@ CapsLock Up:: (A.isBend) ? bend(1, 1)  : 0
      LShift:: (A.isBend) ? bend(-2)    : 0
   LShift Up:: (A.isBend) ? bend(2, 1)  : 0
    Space Up:: (Z.palmMute) or strum(0)
-      #LAlt:: A.isLatch := !A.isLatch, tip()
+      !RAlt:: A.isLatch := !A.isLatch, tip()
        RAlt:: A.isHold := !A.isHold, tip()
     AppsKey:: A.isBend := !A.isBend, tip()
        Left:: octave(-1), tip()
@@ -87,7 +87,7 @@ for sc in StrSplit(layout.%A.layout%, ' ')
 (icon() =>
   TraySetIcon('imageres.dll', 101 + A.isActive))()
 
-(tip() => TrayTip(!A.isActive ? '' :
+(tip() => ToolTip(!A.isActive ? '' :
   abc(A.firstNote) ' ● '
   ' v' A.velocityA '/' A.velocityB ' ● port ' A.midiPort ':' A.midiChannel+1
   '`n' (A.isLatch ? 'latch' : 'hold') ' ' (A.isHold ? '✅' : '❌')
